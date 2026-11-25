@@ -15,7 +15,9 @@
 | Route | Purpose |
 |---|---|
 | `index.html` | Home, mission and next upcoming seminar |
-| `events.html` | Upcoming and recently held events |
+| `events.html` | Combined event index |
+| `news.html` | Latest public announcements |
+| `courses.html` | Course registration list |
 | `event-2026-12-05.html` | December 5, 2026 seminar and BeClass link |
 | `event-2026-10-31.html` | October 31, 2026 historical event |
 | `archive.html` | 2025–2026 historical event index |

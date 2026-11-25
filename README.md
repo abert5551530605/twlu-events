@@ -14,7 +14,9 @@
 ## Website 2.0 routes
 
 - `index.html` — 首頁、學會宗旨、最新活動
-- `events.html` — 最新課程與活動列表
+- `events.html` — 綜合活動列表
+- `news.html` — 最新消息
+- `courses.html` — 課程報名
 - `event-2026-12-05.html` — 2026/12/5 抵押權法令實務眉角解析
 - `event-2026-10-31.html` — 2026/10/31 歷史活動
 - `archive.html` — 2025–2026 歷史活動

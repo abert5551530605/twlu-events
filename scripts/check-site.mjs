@@ -5,6 +5,8 @@ const root = process.cwd();
 const required = [
   "index.html",
   "events.html",
+  "news.html",
+  "courses.html",
   "event-2026-12-05.html",
   "event-2026-10-31.html",
   "archive.html",
