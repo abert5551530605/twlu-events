@@ -102,3 +102,20 @@ Before switching the production domain:
 - Do not point `twlu.site` DNS to GitHub Pages until all content, original media, registration and redirect tests are complete.
 - Preview deployment must use a separate URL/domain.
 - No production deployment or DNS change is performed by this content migration commit.
+
+
+## Additional official-site navigation discovered
+
+The original WordPress main menu includes:
+- 學會簡介: 立案證書、學會成立沿革、歷任理事長、理監事名單、章程、學會組織表、專務委員會組織表、理監事選舉罷免辦法、專務委員會組織簡則.
+- 課程報名、最新消息、加入會員.
+- 會員專區: 會員登入、公文存檔、會議記錄、會員名單、收支結算、檔案下載.
+- 聯絡我們、活動剪影.
+
+The member-area items may contain restricted or personal/member financial information. Do not copy them into a public static website. Confirm access rules and preserve a secure authenticated system before migrating any member portal.
+
+### Newly verified association history and public footer
+- Association name: 新北市土地利用學會.
+- Founding date: 2004-08-27 (ROC 93-08-27), official page: https://twlu.site/學會成立沿革/
+- Original public footer (older page version): TEL (02) 2961-8835; FAX (02) 2961-7156; E-mail f540419@yahoo.com.tw. These details are marked as needing reconfirmation before production.
+- Original navigation confirms the existence of public pages for registration certificate, charter, past chairs, organization charts, committee organization, election/recall rules and committee rules. Their full contents or original attachments were not available in the current browser extraction and remain migration blockers.

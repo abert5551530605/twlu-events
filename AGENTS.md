@@ -25,6 +25,12 @@ This repository is exclusively for「新北市土地利用學會」official webs
 - Never commit SHEETS_SECRET, API keys, tokens, private credentials, attendee data, or spreadsheets containing personal information.
 - Do not log or expose registrant personal information.
 
+## Public / member-area boundary
+- The original WordPress navigation includes public association profile documents and a member area (login, correspondence archive, minutes, member list, financial statements and downloads).
+- Do not migrate member lists, financial records, private correspondence, meeting records or other restricted content into a public static site.
+- Confirm access control and authorization before any member-area migration.
+- Public contact information from older page footers must be labelled as provisional until the association reconfirms it.
+
 ## Assets
 - Preserve the official logo and original media files when supplied.
 - Do not present a temporary geometric icon as the official logo.

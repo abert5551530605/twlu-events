@@ -19,6 +19,8 @@
 - `event-2026-10-31.html` — 2026/10/31 歷史活動
 - `archive.html` — 2025–2026 歷史活動
 - `about.html` — 學會宗旨與服務方向
+- `history.html` — 學會成立沿革
+- `organization.html` — 學會組織與制度文件入口
 - `board.html` — 第八屆理監事名單
 - `gallery.html` — 活動剪影與官方照片入口
 - `contact.html` — 官方網站與報名資訊

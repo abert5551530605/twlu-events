@@ -9,6 +9,8 @@ const required = [
   "event-2026-10-31.html",
   "archive.html",
   "about.html",
+  "history.html",
+  "organization.html",
   "board.html",
   "gallery.html",
   "contact.html",
