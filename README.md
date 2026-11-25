@@ -19,6 +19,10 @@
 - 可部署至靜態網站託管服務；目前沒有設定自動正式部署。
 - 以 GitHub Pull Request 作為預覽與審查流程。
 
+## 品牌素材提醒
+
+目前頁首、頁尾與 favicon 的幾何地圖符號是新版介面的暫用識別圖樣，**不是學會正式 Logo**。取得核准的原始 Logo 檔案後，應以正式圖稿取代，並遵循其色彩與留白規範。
+
 ## 設計原則
 
 - UI UX Pro Max：Accessible & Ethical + Minimalism & Swiss Style。
