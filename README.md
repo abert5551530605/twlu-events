@@ -20,6 +20,9 @@
 - `archive.html` — 2025–2026 歷史活動
 - `about.html` — 學會宗旨與服務方向
 - `history.html` — 學會成立沿革
+- `past-presidents.html` — 已核實的歷任理事長資料
+- `documents.html` — 正式制度文件匯入狀態
+- `membership.html` — 會員申請資訊（原文待確認）
 - `organization.html` — 學會組織與制度文件入口
 - `board.html` — 第八屆理監事名單
 - `gallery.html` — 活動剪影與官方照片入口

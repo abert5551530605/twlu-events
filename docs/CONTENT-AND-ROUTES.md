@@ -119,3 +119,14 @@ The member-area items may contain restricted or personal/member financial inform
 - Founding date: 2004-08-27 (ROC 93-08-27), official page: https://twlu.site/學會成立沿革/
 - Original public footer (older page version): TEL (02) 2961-8835; FAX (02) 2961-7156; E-mail f540419@yahoo.com.tw. These details are marked as needing reconfirmation before production.
 - Original navigation confirms the existence of public pages for registration certificate, charter, past chairs, organization charts, committee organization, election/recall rules and committee rules. Their full contents or original attachments were not available in the current browser extraction and remain migration blockers.
+
+
+## Additional public routes and migration gaps
+- `history.html`: verified founding date and major public governance milestones.
+- `past-presidents.html`: only 7th and 8th chairpersons are currently verified; earlier terms await the original official list.
+- `organization.html`: records that the official site lists organization charts and committee rules; actual chart/document bytes are not yet imported.
+- `documents.html`: lists registration certificate, charter, organization charts, election/recall rules and committee rules as pending original-file import.
+- `membership.html`: public membership application page exists on the original site, but eligibility, fee, application and privacy text were not retrievable; no guessed form is published.
+
+## Official menu inventory / member portal
+The original WordPress navigation also includes member-only areas for login, correspondence archive, meeting records, member lists, financial statements and downloads. These must not be copied to public static pages. Preserve an authenticated portal or arrange a separately secured migration; obtain the association's authorization and current access-control details first.
