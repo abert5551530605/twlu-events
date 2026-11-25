@@ -1,45 +1,62 @@
-# 新北市土地利用學會｜活動與課程
+# 新北市土地利用學會｜官方網站改版
 
-本 repository 是學會官方網站與活動報名服務的**單一整合專案**。母網站與 2026 年 10 月專題講座報名頁屬於同一套系統，應共用品牌、導覽、設計規範與維護流程，不應拆成互不相關的 repository。
+本 repository 專用於新北市土地利用學會官方網站的重新設計與遷移。
 
-## 系統範圍
+## 內容來源
 
-- **母網站**：學會介紹、最新消息、活動與課程、會員及聯絡資訊。
-- **活動模組**：活動介紹、報名表單、報名狀態及管理流程。2026 年 10 月 31 日專題講座頁面納入此模組，保留作為歷史活動頁與未來活動頁的實作參考。
-- **報名後端**：既有 Google Apps Script Web App 與 Google Sheets。前端與後端的契約應維持一致；不得將金鑰或機密設定寫入前端或 Git。
+- 官方原網站：<https://twlu.site/>
+- 最新消息：<https://twlu.site/category/最新消息/>
+- 課程報名：<https://twlu.site/category/課程報名/>
+- 理監事名單：<https://twlu.site/理監事名單/>
 
-## 既有網站入口
+官方網站是學會宗旨、理監事名單、活動公告與公開報名連結的主要依據。已將 2026 年 12 月 5 日專題講座及 2025–2026 年部分歷史活動整理進新版。
 
-- 母網站：<https://twlu-events.rtfghggytjjj.chatgpt.site/>
-- 2026 年 10 月活動頁：<https://land-seminar-october-2026.rtfghggytjjj.chatgpt.site>
+## Website 2.0 routes
 
-以上是目前既有的 ChatGPT Sites 網址。GitHub repository 的提交不代表這些 Sites 網址會自動更新；正式切換前必須另行確認部署方式、功能與資料串接，不能直接中斷現有服務。
+- `index.html` — 首頁、學會宗旨、最新活動
+- `events.html` — 綜合活動列表
+- `news.html` — 最新消息
+- `courses.html` — 課程報名
+- `event-2026-12-05.html` — 2026/12/5 抵押權法令實務眉角解析
+- `event-2026-10-31.html` — 2026/10/31 歷史活動
+- `archive.html` — 2025–2026 歷史活動
+- `about.html` — 學會宗旨與服務方向
+- `history.html` — 學會成立沿革
+- `past-presidents.html` — 已核實的歷任理事長資料
+- `documents.html` — 正式制度文件匯入狀態
+- `membership.html` — 會員申請資訊（原文待確認）
+- `organization.html` — 學會組織與制度文件入口
+- `board.html` — 第八屆理監事名單
+- `gallery.html` — 活動剪影與官方照片入口
+- `contact.html` — 官方網站與報名資訊
 
-## Repository 身分與邊界
+## 技術
 
-- GitHub：`abert5551530605/twlu-events`
-- 本 repository 只服務「新北市土地利用學會｜活動與課程」。
-- 不得匯入、修改或引用北摩鹿加數位歷史圖集（`northern-moluccas-historical-atlas`）的程式碼、資料庫、部署設定或資產。
-- 母網站與十月活動報名頁應在本 repository 內整合維護。
+- 原生 HTML、CSS、JavaScript，無前端框架及執行期套件依賴。
+- 共用樣式：`assets/css/site.css`
+- 共用互動：`assets/js/site.js`
+- GitHub Actions 執行靜態網站檢查。
+- 可先部署到獨立 preview URL，再安排正式網域遷移。
 
-## 初步技術盤點
+## 報名系統邊界
 
-先前對母網站的初步盤點為輕量靜態網站；活動報名流程另有 Google Apps Script `doPost` Web App 與 Google Sheets。完整前端原始碼、資產與 Apps Script 原始碼尚待匯入後再確認，不應在未檢查前臆測框架或目錄。
+已核實的 WordPress 原網站活動公告使用 BeClass 外部報名連結。先前 ChatGPT Sites 專案另有討論 Google Apps Script / Google Sheets 報名流程。兩者必須分開盤點，不得假設是同一個 API。
 
-## 建議目錄方向
+- 2026/12/5 報名：<https://www.beclass.com/rid=31528ee6ae84276cc736>
+- 不得猜測或替換報名 API。
+- 不得提交 SHEETS_SECRET、API keys、tokens、私人憑證或報名者個資。
+- 正式報名流程需在預覽環境確認連結、狀態、截止日期與錯誤處理。
 
-待原始碼匯入及盤點後，再依實際技術結構調整；預期以功能邊界整理：
+## 尚待匯入的原始資產
 
-- `apps/main-site/`：母網站
-- `apps/events/`：活動頁與報名介面
-- `integrations/google-apps-script/`：經確認後納入版本控制的 Apps Script 程式碼（不得包含機密）
-- `docs/`：架構、部署、資料欄位與維運說明
+目前已確認 WordPress 網站保留多篇活動照片、活動剪影及附件，但尚未取得這些檔案的可下載副本。正式切換網域前，必須匯出原始 Logo、照片、PDF 及其他媒體檔，放入 repository 並改用本地路徑。
 
-此為目標方向，不代表目前已存在這些程式檔。
+目前頁首的幾何圖形只是暫用 UI 圖樣，不是學會正式 Logo。
 
-## 安全原則
+## 部署原則
 
-- `SHEETS_SECRET`、API token、私人憑證及其他機密只能存放於受控環境變數或 Apps Script Properties。
-- 不得將報名者個資、正式名單或含個資的試算表匯出檔提交至 Git。
-- 修改報名 API 前，先確認既有欄位、方案代碼、重複報名防護及 request ID 冪等邏輯。
-- 任何正式部署都先做預覽與測試，不直接覆蓋仍在使用的網站。
+- 保留 <https://twlu.site/> 正式 WordPress 網站，不在此階段修改。
+- 預覽站使用獨立 URL。
+- 不將 `twlu.site` DNS 指向 GitHub Pages，直到內容、圖片、報名流程、舊網址導向及行動版檢查全部通過。
+- Earlier ChatGPT Sites project URLs are separate legacy sources; do not confuse them with the official WordPress source.
+- 本 repository 不得匯入、修改或部署 Northern Moluccas Digital Historical Atlas。
