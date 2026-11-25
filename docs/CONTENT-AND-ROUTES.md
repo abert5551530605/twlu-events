@@ -130,3 +130,14 @@ The member-area items may contain restricted or personal/member financial inform
 
 ## Official menu inventory / member portal
 The original WordPress navigation also includes member-only areas for login, correspondence archive, meeting records, member lists, financial statements and downloads. These must not be copied to public static pages. Preserve an authenticated portal or arrange a separately secured migration; obtain the association's authorization and current access-control details first.
+
+
+## Source freshness and conflicting cached versions
+The direct browser-opened `/理監事名單/` page returned a stale 7th-term snapshot (crawled as an older page), while a current search-indexed official result crawled 2026-11-25 reports the 8th-term roster and term 114-12-31 to 117-12-30. The new public board page uses the current 8th-term result; do not regress to the stale 7th-term snapshot. The 7th-term roster is retained only as historical context.
+
+## Final domain-cutover blockers
+- Import and verify original media/logo/PDF attachments.
+- Reconstruct public pages for registration certificate, charter, organization charts, committee rules, election rules and membership application content.
+- Decide how to preserve the member-only login and restricted member documents without exposing private records.
+- Reconfirm public phone, fax and email before publishing them as current.
+- Replace all source-site links that point back to `twlu.site` with local routes or an approved legacy subdomain before the DNS cutover.
