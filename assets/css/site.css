@@ -322,3 +322,27 @@ details.faq[open] summary::after { content: "−"; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* Content components added during official-site content migration */
+.board-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.board-card { padding:22px; border:1px solid var(--color-border); border-radius:14px; background:#fff; }
+.board-role { display:block; margin-bottom:7px; color:var(--color-accent); font-size:12px; font-weight:700; letter-spacing:.08em; }
+.board-name { margin:0; color:var(--color-primary); font-family:var(--font-heading); font-size:1.08rem; font-weight:650; }
+.event-agenda { display:grid; gap:10px; margin:18px 0 0; padding:0; list-style:none; counter-reset:agenda; }
+.event-agenda li { position:relative; padding:12px 14px 12px 48px; border-radius:10px; background:#f3f6f9; color:#405166; counter-increment:agenda; }
+.event-agenda li::before { position:absolute; left:14px; top:11px; color:var(--color-accent); font-family:var(--font-heading); font-size:12px; font-weight:700; content:counter(agenda, decimal-leading-zero); }
+.event-highlight { padding:22px; border:1px solid #c8dce8; border-radius:14px; background:#f0f7fb; }
+.event-highlight h2,.event-highlight h3 { margin-top:0; }
+.event-highlight p:last-child { margin-bottom:0; }
+.history-year { margin:34px 0 14px; color:var(--color-primary); font-family:var(--font-heading); font-size:1.45rem; }
+.history-year:first-child { margin-top:0; }
+.history-item { display:grid; grid-template-columns:105px minmax(0,1fr); gap:20px; padding:20px 0; border-bottom:1px solid var(--color-border); }
+.history-date { color:var(--color-accent); font-family:var(--font-heading); font-size:13px; font-weight:700; letter-spacing:.04em; }
+.history-item h3 { margin:0 0 6px; font-size:1.05rem; }
+.history-item p { margin:0; color:var(--color-muted); font-size:14px; }
+@media (max-width:700px) {
+  .board-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .history-item { grid-template-columns:1fr; gap:5px; }
+}
+@media (max-width:420px) { .board-grid { grid-template-columns:1fr; } }

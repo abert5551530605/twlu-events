@@ -1,68 +1,55 @@
-# 新北市土地利用學會｜活動與課程
+# 新北市土地利用學會｜官方網站改版
 
-本 repository 是「新北市土地利用學會」母網站與活動資訊服務的單一整合專案。
+本 repository 專用於新北市土地利用學會官方網站的重新設計與遷移。
 
-## Website 2.0
+## 內容來源
 
-本分支正在以 UI UX Pro Max 的設計原則，重新建構完整的靜態網站前端：
+- 官方原網站：<https://twlu.site/>
+- 最新消息：<https://twlu.site/category/最新消息/>
+- 課程報名：<https://twlu.site/category/課程報名/>
+- 理監事名單：<https://twlu.site/理監事名單/>
 
-- 首頁：學會資訊入口、活動摘要與主要導覽
-- 活動與課程：活動列表、狀態篩選與歷史紀錄
-- 活動詳情：保留已結束活動資訊，不提供過期報名
-- 關於學會：網站定位與正式機構資訊區
-- 聯絡資訊：待官方聯絡資料確認後補齊
+官方網站是學會宗旨、理監事名單、活動公告與公開報名連結的主要依據。已將 2026 年 12 月 5 日專題講座及 2025–2026 年部分歷史活動整理進新版。
 
-### 技術方式
+## Website 2.0 routes
 
-- 原生 HTML、CSS、JavaScript，無前端框架與執行期套件依賴。
-- 共用樣式與互動程式位於 `assets/css/site.css`、`assets/js/site.js`。
-- 可部署至靜態網站託管服務；目前沒有設定自動正式部署。
-- 以 GitHub Pull Request 作為預覽與審查流程。
+- `index.html` — 首頁、學會宗旨、最新活動
+- `events.html` — 最新課程與活動列表
+- `event-2026-12-05.html` — 2026/12/5 抵押權法令實務眉角解析
+- `event-2026-10-31.html` — 2026/10/31 歷史活動
+- `archive.html` — 2025–2026 歷史活動
+- `about.html` — 學會宗旨與服務方向
+- `board.html` — 第八屆理監事名單
+- `gallery.html` — 活動剪影與官方照片入口
+- `contact.html` — 官方網站與報名資訊
 
-## 品牌素材提醒
+## 技術
 
-目前頁首、頁尾與 favicon 的幾何地圖符號是新版介面的暫用識別圖樣，**不是學會正式 Logo**。取得核准的原始 Logo 檔案後，應以正式圖稿取代，並遵循其色彩與留白規範。
+- 原生 HTML、CSS、JavaScript，無前端框架及執行期套件依賴。
+- 共用樣式：`assets/css/site.css`
+- 共用互動：`assets/js/site.js`
+- GitHub Actions 執行靜態網站檢查。
+- 可先部署到獨立 preview URL，再安排正式網域遷移。
 
-## 設計原則
+## 報名系統邊界
 
-- UI UX Pro Max：Accessible & Ethical + Minimalism & Swiss Style。
-- 高對比、清晰字級、語意化 HTML、鍵盤導覽、可見焦點狀態。
-- 手機優先、響應式排版、44px 以上主要觸控目標。
-- 尊重 `prefers-reduced-motion`。
-- 不使用未經核實的活動、講者、場地、聯絡資料或機構統計。
+已核實的 WordPress 原網站活動公告使用 BeClass 外部報名連結。先前 ChatGPT Sites 專案另有討論 Google Apps Script / Google Sheets 報名流程。兩者必須分開盤點，不得假設是同一個 API。
 
-## 既有網站入口（保留，不會由 GitHub 提交自動覆蓋）
+- 2026/12/5 報名：<https://www.beclass.com/rid=31528ee6ae84276cc736>
+- 不得猜測或替換報名 API。
+- 不得提交 SHEETS_SECRET、API keys、tokens、私人憑證或報名者個資。
+- 正式報名流程需在預覽環境確認連結、狀態、截止日期與錯誤處理。
 
-- 母網站：<https://twlu-events.rtfghggytjjj.chatgpt.site/>
-- 2026 年 10 月活動頁：<https://land-seminar-october-2026.rtfghggytjjj.chatgpt.site>
+## 尚待匯入的原始資產
 
-GitHub 提交不會自動更新以上 ChatGPT Sites 頁面。正式切換前必須另外確認部署方式、網域、表單串接及內容完整性。
+目前已確認 WordPress 網站保留多篇活動照片、活動剪影及附件，但尚未取得這些檔案的可下載副本。正式切換網域前，必須匯出原始 Logo、照片、PDF 及其他媒體檔，放入 repository 並改用本地路徑。
 
-## 報名後端與資料安全
+目前頁首的幾何圖形只是暫用 UI 圖樣，不是學會正式 Logo。
 
-原有報名後端為 Google Apps Script Web App 與 Google Sheets。新版前端目前**尚未連接報名 API**，因為目前 repository 尚無原始 Apps Script 程式碼、完整欄位規格或 API request/response 範例。
+## 部署原則
 
-接回後端前必須先確認並保留：
-- 原始欄位名稱、選項代碼與驗證規則
-- request ID 冪等性
-- 重複報名保護
-- 成功、失敗、額滿與截止等回應狀態
-
-禁止將 `SHEETS_SECRET`、API keys、tokens、私人憑證、報名者個資或含個資的試算表提交至 Git。
-
-## 目前已知資料限制
-
-目前可核實的活動資料只有 2026 年 10 月 31 日專題講座日期與活動類型；該活動已結束。講題、講者、場地、完整時間及其他歷史頁內容仍待舊站資料匯入。
-
-正式學會沿革、宗旨、組織、聯絡電話、地址、電子郵件及社群網址也待官方資料確認。網站以清楚標示資料缺口的方式呈現，不會自行捏造。
-
-## 專案邊界
-
-- 本 repository 僅服務「新北市土地利用學會｜活動與課程」。
-- 不得匯入、修改或部署 Northern Moluccas Digital Historical Atlas 專案。
-- 母網站與活動頁維持同一 repository、共用品牌與維護流程。
-- 不覆蓋仍在使用的 ChatGPT Sites 正式頁面。
-
-## 本機預覽
-
-直接以瀏覽器開啟 `index.html` 即可預覽。所有頁面均為靜態 HTML，可使用任何靜態 HTTP server 進行完整測試。
+- 保留 <https://twlu.site/> 正式 WordPress 網站，不在此階段修改。
+- 預覽站使用獨立 URL。
+- 不將 `twlu.site` DNS 指向 GitHub Pages，直到內容、圖片、報名流程、舊網址導向及行動版檢查全部通過。
+- Earlier ChatGPT Sites project URLs are separate legacy sources; do not confuse them with the official WordPress source.
+- 本 repository 不得匯入、修改或部署 Northern Moluccas Digital Historical Atlas。

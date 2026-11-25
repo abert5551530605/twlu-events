@@ -1,113 +1,35 @@
 <!doctype html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0f172a">
-  <meta name="description" content="瀏覽新北市土地利用學會活動公告、課程資訊與歷史活動紀錄。">
-  <title>活動與課程｜新北市土地利用學會</title>
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css">
-  <script src="assets/js/site.js" defer></script>
-</head>
-<body>
-<a class="skip-link" href="#main-content">跳至主要內容</a>
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="index.html" aria-label="新北市土地利用學會，回到首頁">
-      <span class="brand-mark"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 7.5 12 4l7 3 9-3v20.5l-9 3-7-3-8 3V7.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m12 4v20.5M19 7v20.5M7 13l4-2 4 2 5-2 5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span class="brand-copy"><span class="brand-name">新北市土地利用學會</span><span class="brand-subtitle">New Taipei Land Use Association</span></span>
-    </a>
-    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav" aria-label="開啟導覽選單"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
-    <nav class="site-nav" id="site-nav" data-site-nav aria-label="主要導覽">
-      <a class="nav-link" href="index.html">首頁</a><a class="nav-link" href="events.html" aria-current="page">活動與課程</a><a class="nav-link" href="about.html">關於學會</a><a class="nav-link" href="contact.html">聯絡資訊</a>
-      <a class="button button-primary button-small nav-cta" href="events.html">瀏覽活動 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </nav>
-  </div>
-</header>
-<main id="main-content">
-
-<section class="page-hero">
-  <div class="container">
-    <nav class="breadcrumb" aria-label="麵包屑導覽"><a href="index.html">首頁</a><span>/</span><span aria-current="page">活動與課程</span></nav>
-    <p class="eyebrow">Activities & Courses</p>
-    <h1>活動與課程</h1>
-    <p class="lead">依活動狀態瀏覽公告與歷史紀錄。活動日期、地點及參與方式請以各活動頁的正式資訊為準。</p>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <div><h2>活動列表</h2><p>目前頁面僅列出已確認的歷史活動；近期活動資料待正式公告後更新。</p></div>
-    </div>
-    <div class="filter-row" role="group" aria-label="依活動狀態篩選">
-      <button class="filter-button" type="button" data-event-filter="all" aria-pressed="true">全部活動</button>
-      <button class="filter-button" type="button" data-event-filter="upcoming" aria-pressed="false">即將舉行</button>
-      <button class="filter-button" type="button" data-event-filter="archive" aria-pressed="false">歷史活動</button>
-    </div>
-    <div class="event-list">
-      <article class="event-card" data-event-status="archive">
-        <div class="event-date"><strong>31</strong><span>OCT · 2026</span></div>
-        <div>
-          <div class="event-meta"><span class="status status-archive">已結束</span><span class="status">專題講座</span></div>
-          <h3>2026 年 10 月專題講座</h3>
-          <p>活動日期為 2026 年 10 月 31 日。原活動頁詳細內容尚待匯入，現階段保留日期與歷史活動入口。</p>
-          <a class="button button-secondary button-small" href="event-2026-10-31.html">查看活動資訊 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        </div>
-      </article>
-    </div>
-    <div class="empty-state" data-empty-state aria-live="polite">
-      <h3>目前沒有符合條件的活動</h3>
-      <p>目前沒有可核實的近期活動公告。請稍後再查看，或切換至「歷史活動」瀏覽已結束的活動紀錄。</p>
-    </div>
-  </div>
-</section>
-<section class="section section-white">
-  <div class="container">
-    <div class="cta-band">
-      <div><p class="eyebrow section-kicker">Need more information?</p><h2>活動資訊以正式公告為準</h2><p>詳細講題、講者、場地與報名資訊，將於原始活動資料確認後補齊。</p></div>
-      <a class="button button-secondary" href="contact.html">聯絡資訊 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-  </div>
-</section>
-
-</main>
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-top">
-      <div>
-        <a class="brand footer-brand" href="index.html">
-          <span class="brand-mark"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 7.5 12 4l7 3 9-3v20.5l-9 3-7-3-8 3V7.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m12 4v20.5M19 7v20.5M7 13l4-2 4 2 5-2 5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span class="brand-copy"><span class="brand-name">新北市土地利用學會</span><span class="brand-subtitle">New Taipei Land Use Association</span></span>
-        </a>
-        <p class="footer-intro">學會活動與課程資訊入口。提供活動公告、課程資訊與相關參與指引。</p>
-      </div>
-      <div>
-        <h2 class="footer-heading">網站導覽</h2>
-        <div class="footer-links">
-          <a href="index.html">首頁</a>
-          <a href="events.html">活動與課程</a>
-          <a href="about.html">關於學會</a>
-          <a href="contact.html">聯絡資訊</a>
-        </div>
-      </div>
-      <div>
-        <h2 class="footer-heading">活動資訊</h2>
-        <div class="footer-links">
-          <a href="events.html">活動列表</a>
-          <a href="event-2026-10-31.html">2026 年 10 月歷史活動</a>
-          <a href="contact.html">聯絡資訊</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© <span data-current-year>2026</span> 新北市土地利用學會</p>
-      <p>本網站資訊以學會正式公告為準。</p>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0f172a">
+<meta name="description" content="新北市土地利用學會最新課程、專題講座、報名資訊及活動紀錄。"><title>活動與課程｜新北市土地利用學會</title>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css"><script src="assets/js/site.js" defer></script>
+</head><body><a class="skip-link" href="#main-content">跳至主要內容</a>
+<header class="site-header"><div class="container header-inner">
+<a class="brand" href="index.html" aria-label="新北市土地利用學會，回到首頁"><span class="brand-mark"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 7.5 12 4l7 3 9-3v20.5l-9 3-7-3-8 3V7.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m12 4v20.5M19 7v20.5M7 13l4-2 4 2 5-2 5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-copy"><span class="brand-name">新北市土地利用學會</span><span class="brand-subtitle">New Taipei Land Use Association</span></span></a>
+<button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav" aria-label="開啟導覽選單"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+<nav class="site-nav" id="site-nav" data-site-nav aria-label="主要導覽"><a class="nav-link" href="index.html">首頁</a><a class="nav-link" href="events.html" aria-current="page">活動與課程</a><a class="nav-link" href="about.html">關於學會</a><a class="nav-link" href="contact.html">聯絡資訊</a><a class="button button-primary button-small nav-cta" href="events.html">瀏覽活動 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></nav>
+</div></header><main id="main-content">
+<section class="page-hero"><div class="container"><nav class="breadcrumb" aria-label="麵包屑導覽"><a href="index.html">首頁</a><span>/</span><a href="events.html">活動與課程</a><span>/</span><span aria-current="page">活動與課程</span></nav><p class="eyebrow">Activities & Courses</p><h1>活動與課程</h1><p class="lead">最新專題講座、實務研習與活動資訊。請依活動頁確認日期、報名期限及報名狀態。</p></div></section>
+<section class="section"><div class="container"><div class="section-head"><div><h2>近期活動</h2><p>目前已核實的下一場專題講座為 2026 年 12 月 5 日。</p></div></div>
+<div class="filter-row" role="group" aria-label="依活動狀態篩選"><button class="filter-button" type="button" data-event-filter="all" aria-pressed="true">全部活動</button><button class="filter-button" type="button" data-event-filter="upcoming" aria-pressed="false">即將舉行</button><button class="filter-button" type="button" data-event-filter="archive" aria-pressed="false">歷史活動</button></div>
+<div class="event-list">
+<article class="event-card" data-event-status="upcoming"><div class="event-date"><strong>05</strong><span>DEC · 2026</span></div><div><div class="event-meta"><span class="status ">即將舉行</span><span class="status">專題講座</span></div><h3>115年十一月份專題講座：抵押權法令實務眉角解析</h3><p>講師：黃偉政老師。12/5（六）09:30–16:45，板橋區農會；報名截止 11/30。</p><a class="button button-secondary button-small" href="event-2026-12-05.html">課程詳情與報名 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></article>
+<article class="event-card" data-event-status="archive"><div class="event-date"><strong>31</strong><span>OCT · 2026</span></div><div><div class="event-meta"><span class="status status-archive">已結束</span><span class="status">專題講座</span></div><h3>115年十月份專題講座：意定監護與遺囑登記實務</h3><p>講師：鄭竹祐老師。課程包含意定監護法令與實務、遺囑登記事件重點與實例研討。</p><a class="button button-secondary button-small" href="event-2026-10-31.html">查看活動 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></article>
+<article class="event-card" data-event-status="archive"><div class="event-date"><strong>19</strong><span>SEP · 2026</span></div><div><div class="event-meta"><span class="status status-archive">已結束</span><span class="status">專題講座</span></div><h3>115年九月份專題講座：土地法規與投資實務</h3><p>講師：王世隆總經理。涵蓋國土計畫法規、非都市土地變更、共有土地及投資仲介實務。</p><a class="button button-secondary button-small" href="archive.html#2026-09-19">查看活動 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></article>
+<article class="event-card" data-event-status="archive"><div class="event-date"><strong>22</strong><span>AUG · 2026</span></div><div><div class="event-meta"><span class="status status-archive">已結束</span><span class="status">專題講座</span></div><h3>115年八月份專題講座：工業用地開發策略與產業布局實務</h3><p>講師：王世隆總經理。探討工業土地供需、產業園區制度、工業地產及市場風險。</p><a class="button button-secondary button-small" href="archive.html#2026-08-22">查看活動 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></article>
+<article class="event-card" data-event-status="archive"><div class="event-date"><strong>25</strong><span>JUL · 2026</span></div><div><div class="event-meta"><span class="status status-archive">已結束</span><span class="status">專題講座</span></div><h3>115年七月份專題講座：區域計畫至國土計畫之土地使用管制</h3><p>講師：袁世芬老師。非都市土地變更、農地變更及新舊制度銜接。</p><a class="button button-secondary button-small" href="archive.html#2026-07-25">查看活動 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></article>
+<article class="event-card" data-event-status="archive"><div class="event-date"><strong>25</strong><span>JUN · 2026</span></div><div><div class="event-meta"><span class="status status-archive">已結束</span><span class="status">戶外活動</span></div><h3>115年六月份戶外活動：特富野古道二日遊</h3><p>活動日期：2026/6/25–26。原網站列有活動紀錄與多張照片。</p><a class="button button-secondary button-small" href="gallery.html">查看活動 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></article>
+<article class="event-card" data-event-status="archive"><div class="event-date"><strong>23</strong><span>MAY · 2026</span></div><div><div class="event-meta"><span class="status status-archive">已結束</span><span class="status">專題講座</span></div><h3>115年五月專題講座：工業用地管制實務及商機開發與陷阱</h3><p>講師：郭永元老師。2026/5/23，板橋區農會。</p><a class="button button-secondary button-small" href="archive.html#2026-05-23">查看活動 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></article>
+<article class="event-card" data-event-status="archive"><div class="event-date"><strong>25</strong><span>APR · 2026</span></div><div><div class="event-meta"><span class="status status-archive">已結束</span><span class="status">專題講座</span></div><h3>115年四月份專題講座：遺贈稅法修正與農地容許使用實務</h3><p>上午黃振國老師、下午李忠憲老師，分別研討遺贈稅法修正與農業設施申請、執行業務稅務申報。</p><a class="button button-secondary button-small" href="archive.html#2026-04-25">查看活動 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></article>
+<article class="event-card" data-event-status="archive"><div class="event-date"><strong>28</strong><span>MAR · 2026</span></div><div><div class="event-meta"><span class="status status-archive">已結束</span><span class="status">專題講座</span></div><h3>115年三月份專題講座：農業用地多元化使用商機歸納與實務解析</h3><p>講師：崔富治老師。2026/3/28，板橋區農會。</p><a class="button button-secondary button-small" href="archive.html#2026-03-28">查看活動 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></article>
+</div><div class="empty-state" data-empty-state aria-live="polite"><h3>目前沒有符合條件的活動</h3><p>目前沒有其他已核實的即將舉行活動，請稍後再查看學會公告。</p></div>
+<div style="margin-top:32px"><a class="button button-secondary" href="archive.html">瀏覽完整歷史活動紀錄 <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3.5 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+</div></section>
+</main><footer class="site-footer"><div class="container"><div class="footer-top">
+<div><a class="brand footer-brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 7.5 12 4l7 3 9-3v20.5l-9 3-7-3-8 3V7.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m12 4v20.5M19 7v20.5M7 13l4-2 4 2 5-2 5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="brand-copy"><span class="brand-name">新北市土地利用學會</span><span class="brand-subtitle">New Taipei Land Use Association</span></span></a><p class="footer-intro">致力研習土地利用法規，整合土地最有價值資訊，協助政府推動土地政策，創造土地最有利之價值。</p></div>
+<div><h2 class="footer-heading">網站導覽</h2><div class="footer-links"><a href="index.html">首頁</a><a href="events.html">最新活動</a><a href="archive.html">歷史活動</a><a href="about.html">學會宗旨</a><a href="board.html">理監事名單</a></div></div>
+<div><h2 class="footer-heading">相關資訊</h2><div class="footer-links"><a href="gallery.html">活動剪影</a><a href="contact.html">聯絡資訊</a><a href="https://twlu.site/" target="_blank" rel="noopener noreferrer">原始官方網站</a></div></div>
+</div><div class="footer-bottom"><p>© <span data-current-year>2026</span> 新北市土地利用學會</p><p>活動資訊以學會最新正式公告為準。</p></div></div></footer></body></html>
