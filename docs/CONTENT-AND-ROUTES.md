@@ -40,3 +40,8 @@ Before reconnecting registration:
 4. Preserve request-ID idempotency and duplicate-registration prevention.
 5. Test in a safe environment; do not submit live attendee data during preview.
 6. Verify registration-open/closed states against actual event configuration.
+
+
+## Branding asset note
+
+The geometric map/parcel symbol currently shown in the header, footer and favicon is a temporary UI mark created for this first-pass rebuild. It is **not** represented as the association's official logo. Replace it with the original approved logo artwork when that asset is imported; preserve official colors and clear-space rules if supplied.
