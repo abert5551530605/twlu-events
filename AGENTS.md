@@ -40,4 +40,5 @@ The main association website and the October 2026 event registration page are pa
 
 ## Current repository status
 
-The repository was initially empty when inspected. The source code and assets for the existing Sites pages still need to be imported and inventoried. The proposed directory layout in README.md is a planning guide, not a claim that those files already exist.
+On 2026-11-26 the user explicitly authorized a complete UI UX Pro Max redesign. This repository now contains that redesigned static association website, shared event detail pages, design records, build scripts, and automated checks. The existing October Apps Script backend and original Sites server source have not been imported or modified. See README.md and docs/integrations.md for the actual boundaries. GitHub CI builds artifacts; it does not publish over existing production.
+

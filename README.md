@@ -1,45 +1,47 @@
 # 新北市土地利用學會｜活動與課程
 
-本 repository 是學會官方網站與活動報名服務的**單一整合專案**。母網站與 2026 年 10 月專題講座報名頁屬於同一套系統，應共用品牌、導覽、設計規範與維護流程，不應拆成互不相關的 repository。
+依使用者指定的 UI UX Pro Max skill 全面重新設計的網站。此倉庫只用於新北市土地利用學會，不包含其他專案。
 
-## 系統範圍
+## 本次交付
 
-- **母網站**：學會介紹、最新消息、活動與課程、會員及聯絡資訊。
-- **活動模組**：活動介紹、報名表單、報名狀態及管理流程。2026 年 10 月 31 日專題講座頁面納入此模組，保留作為歷史活動頁與未來活動頁的實作參考。
-- **報名後端**：既有 Google Apps Script Web App 與 Google Sheets。前端與後端的契約應維持一致；不得將金鑰或機密設定寫入前端或 Git。
+- 大字、高對比、手機優先的全新首頁。
+- 可搜尋課名／講師、依主題與活動狀態篩選的活動總覽。
+- 四場課程詳情頁、學會介紹、參加指南與常見問題。
+- 十月份課程保留歷史海報、費用、整天／上午／下午方案紀錄；不重新開放已結束活動。
+- 最新十一月份講座實際上課日期為 **2026-12-05**；報名截止 **2026-11-30**，連至官網公布的 BeClass 表單。
+- 完整靜態 HTML：沒有 JavaScript 仍可閱讀、導覽與開啟原始公告。搜尋與行動選單為漸進增強。
 
-## 既有網站入口
+## 開發
 
-- 母網站：<https://twlu-events.rtfghggytjjj.chatgpt.site/>
-- 2026 年 10 月活動頁：<https://land-seminar-october-2026.rtfghggytjjj.chatgpt.site>
+Node.js 22 或更新版；網站建置與自動測試不需要安裝第三方套件。
 
-以上是目前既有的 ChatGPT Sites 網址。GitHub repository 的提交不代表這些 Sites 網址會自動更新；正式切換前必須另行確認部署方式、功能與資料串接，不能直接中斷現有服務。
+```sh
+npm run check
+npm run preview
+# 開啟 http://localhost:4173
+```
 
-## Repository 身分與邊界
+`npm run build` 產生 `dist/`。可部署到支援靜態網站的主機；在主機設定建置指令 `npm run build`，輸出目錄 `dist`。設定非敏感環境變數 `SITE_URL=https://your-domain.example` 後會產生對應 canonical URL 與 sitemap；不要在預覽環境填入既有正式網站網址。
 
-- GitHub：`abert5551530605/twlu-events`
-- 本 repository 只服務「新北市土地利用學會｜活動與課程」。
-- 不得匯入、修改或引用北摩鹿加數位歷史圖集（`northern-moluccas-historical-atlas`）的程式碼、資料庫、部署設定或資產。
-- 母網站與十月活動報名頁應在本 repository 內整合維護。
+GitHub Actions 執行建置與測試，並上傳 `twlu-events-website` 建置產物。**此工作流程不會自動覆蓋原 ChatGPT Sites 或 twlu.site。** 原網站發佈與主機連線尚未變更。
 
-## 初步技術盤點
+## 維護位置
 
-先前對母網站的初步盤點為輕量靜態網站；活動報名流程另有 Google Apps Script `doPost` Web App 與 Google Sheets。完整前端原始碼、資產與 Apps Script 原始碼尚待匯入後再確認，不應在未檢查前臆測框架或目錄。
+| 內容 | 檔案 |
+|---|---|
+| 課程、日期、講師、公告與報名入口 | `src/events.mjs` |
+| 共用導覽、頁面內容與版型 | `src/templates.mjs` |
+| 設計變數、字級與響應式版面 | `public/assets/style.css` |
+| 搜尋、選單與日期狀態更新 | `public/assets/app.js` |
+| 圖片 | `public/assets/` |
+| 設計依據與覆寫 | `design-system/twlu-events/` |
+| 公開資料來源 | `docs/sources.md` |
+| 既有系統整合邊界 | `docs/integrations.md` |
 
-## 建議目錄方向
+新增活動時填寫唯一 slug、日期、截止日期、來源與經核實的報名網址，新增後重建。首頁本期主視覺取活動陣列第一項，調整本期活動時請同步更新主視覺的日期文案。日期採台北時區；截止與結束後，瀏覽器會更新狀態並移除過期的報名入口。無 JavaScript 的頁面狀態以建置時為準，請於截止後重新建置。
 
-待原始碼匯入及盤點後，再依實際技術結構調整；預期以功能邊界整理：
+## 個資與報名
 
-- `apps/main-site/`：母網站
-- `apps/events/`：活動頁與報名介面
-- `integrations/google-apps-script/`：經確認後納入版本控制的 Apps Script 程式碼（不得包含機密）
-- `docs/`：架構、部署、資料欄位與維運說明
+此新版入口網站不收集個人資料、不公開報名名單、不儲存憑證。各活動報名入口依原公告連結；既有十月份 Google Apps Script / Google Sheets 後端未被修改。不要將 `SHEETS_SECRET`、報名名單或匯出的 Excel 提交至 GitHub。
 
-此為目標方向，不代表目前已存在這些程式檔。
-
-## 安全原則
-
-- `SHEETS_SECRET`、API token、私人憑證及其他機密只能存放於受控環境變數或 Apps Script Properties。
-- 不得將報名者個資、正式名單或含個資的試算表匯出檔提交至 Git。
-- 修改報名 API 前，先確認既有欄位、方案代碼、重複報名防護及 request ID 冪等邏輯。
-- 任何正式部署都先做預覽與測試，不直接覆蓋仍在使用的網站。
+這次提交的是全新網站原始碼；不代表舊 Sites 的伺服器端程式已完成匯入。請參閱整合文件。

@@ -1,0 +1,6 @@
+{
+  "name": "twlu-events", "version": "2.0.0", "private": true, "type": "module",
+  "description": "新北市土地利用學會活動與課程 — accessible editorial redesign",
+  "engines": {"node": ">=22"},
+  "scripts": {"build": "node scripts/build.mjs", "test": "node --test", "check": "npm run build && npm test", "preview": "node scripts/serve.mjs"}
+}
