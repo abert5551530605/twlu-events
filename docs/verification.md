@@ -13,3 +13,8 @@ skill 版本 8db36338810d0942567b97ce439affd1619fcf31；`design-system/twlu-even
 
 ## 部署
 `.github/workflows/pages.yml` 於 push 到 main 時建置並發佈 `dist/` 到 GitHub Pages（SITE_URL 指向 github.io 網址）。未測試或寫入任何報名資料，未呼叫既有 Apps Script 後端。
+
+## 動畫更新（2026-11-26）
+- `npm run check`：建置 9 頁、5 項測試通過（新增動畫安全測試：減少動態效果區塊存在、隱藏狀態只在 `.js .reveal`、不使用 `transition: all`）。
+- Chrome + Playwright（1280 寬）於 5 個頁面實測：一般模式下捲動後無卡在不可見的元素、無橫向溢位、無 JS 錯誤、卡片 hover 無延遲；`prefers-reduced-motion: reduce` 模式下載入即全部可見。
+- 未實測：跨頁淡入淡出（View Transitions）於各瀏覽器的表現、Safari / Firefox、低階裝置效能。

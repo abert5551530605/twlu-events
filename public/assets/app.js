@@ -97,3 +97,49 @@ fetch(new URL('./events.json', import.meta.url))
   .catch(() => { /* The pre-rendered content remains readable when offline. */ });
 document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshStatus(); });
 setInterval(refreshStatus, 60000);
+
+/* ---------- Motion: header depth, scroll reveal, list refresh ----------
+   All of this is decoration. Reveal classes are only added when motion is allowed,
+   so content is never hidden for reduced-motion users or if this script fails. */
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const header = document.querySelector('.site-header');
+if (header) {
+  const onScroll = () => header.classList.toggle('scrolled', scrollY > 8);
+  onScroll();
+  addEventListener('scroll', onScroll, {passive: true});
+}
+if (!calm && 'IntersectionObserver' in window) {
+  const targets = document.querySelectorAll([
+    'main .section-heading', '.trust-grid > div', '.cards > .event-card', '.mission-lead', '.mission-intro',
+    '.mission-row', '.help-banner', '.manifesto', '.prose', '.topic-card', '.step', '.visit-card', '.faq details',
+    '.course-content section', '.course-content .notice', '.outline-item', '.enrollment', '.results-line', '.filters'
+  ].join(','));
+  const seen = new Map();
+  const io = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const el = entry.target;
+      el.classList.add('in-view');
+      io.unobserve(el);
+      // Hand control back to the component's own hover/transition rules once revealed.
+      const done = () => { el.classList.remove('reveal', 'in-view'); el.style.removeProperty('--i'); };
+      el.addEventListener('transitionend', e => { if (e.propertyName === 'opacity') done(); }, {once: true});
+      setTimeout(done, 1800);
+    }
+  }, {rootMargin: '0px 0px -8% 0px', threshold: 0.08});
+  targets.forEach(el => {
+    const group = el.parentElement;
+    const index = seen.get(group) || 0;
+    seen.set(group, index + 1);
+    el.style.setProperty('--i', Math.min(index, 5));
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+}
+if (filters && !calm) {
+  for (const el of [search, category, state]) {
+    el.addEventListener(el === search ? 'input' : 'change', () => {
+      cards.forEach(c => { c.classList.remove('refresh'); void c.offsetWidth; if (!c.hidden) c.classList.add('refresh'); });
+    });
+  }
+}

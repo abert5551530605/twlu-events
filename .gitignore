@@ -3,3 +3,11 @@ dist/
 .env*
 !.env.example
 test-results/
+
+# Built output lives only in dist/ (published by GitHub Actions). Never commit it at the repo root.
+/*.html
+/events/
+/assets/
+/sitemap.xml
+/robots.txt
+/.nojekyll

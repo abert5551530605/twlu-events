@@ -62,6 +62,7 @@ export function layout({title, content, nav, depth, path}) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#142766">
+<script>document.documentElement.classList.add('js');</script>
 <title>${fullTitle}</title>
 <meta name="description" content="${desc}">
 <meta property="og:title" content="${fullTitle}">

@@ -38,6 +38,10 @@ The main association website and the October 2026 event registration page are pa
 - Separate preview from production deployment. Do not claim that a GitHub commit updates ChatGPT Sites automatically.
 - Document any manual publishing or environment configuration required.
 
+## Maintenance
+
+Follow `docs/maintenance-workflow.md` (project map, content and design rules, motion rules, pre-merge checklist, deployment, rollback). Ready-to-paste Codex prompts live in `docs/codex-prompt.md`. Built output (`dist/`) is published only by GitHub Actions; never commit it, and never push to the legacy `gh-pages` branch.
+
 ## Current repository status
 
 On 2026-11-26 the user explicitly authorized a complete UI UX Pro Max redesign. This repository now contains that redesigned static association website, shared event detail pages, design records, build scripts, and automated checks. The existing October Apps Script backend and original Sites server source have not been imported or modified. See README.md and docs/integrations.md for the actual boundaries. GitHub CI builds and publishes to GitHub Pages only; it does not publish over existing ChatGPT Sites production.

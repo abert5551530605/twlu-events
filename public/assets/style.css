@@ -334,6 +334,92 @@ details p { margin: 0; padding: 0 20px 18px; color: var(--muted-fg); }
   .brand-text strong { font-size: 1.02rem; }
   .brand-mark { width: 38px; height: 38px; }
 }
+
+/* ================= Motion system =================
+   Tokens: 200ms interactions, 600ms entrances, 40s ambient. Only transform/opacity
+   are animated (no layout thrash). Everything is disabled under prefers-reduced-motion,
+   and scroll-reveal only hides content when JS is running (html.js). */
+:root { --ease-out: cubic-bezier(.22, 1, .36, 1); --dur-in: 650ms; }
+
+/* Cross-page fade (progressive enhancement; Chrome/Edge/Safari 18+) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: 180ms ease both vt-out; }
+::view-transition-new(root) { animation: 320ms var(--ease-out) both vt-in; }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; } }
+
+/* Hero entrance (CSS only, runs once on load) */
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: translateY(26px) scale(.97); } to { opacity: 1; transform: none; } }
+.hero-copy > *, .page-hero .container > *, .detail-heading > div > *, .date-tile { animation: rise var(--dur-in) var(--ease-out) both; }
+.hero-copy > :nth-child(2), .page-hero .container > :nth-child(2), .detail-heading > div > :nth-child(2) { animation-delay: 80ms; }
+.hero-copy > :nth-child(3), .page-hero .container > :nth-child(3), .detail-heading > div > :nth-child(3) { animation-delay: 160ms; }
+.hero-copy > :nth-child(4), .detail-heading > div > :nth-child(4) { animation-delay: 240ms; }
+.detail-heading > div > :nth-child(5) { animation-delay: 320ms; }
+.featured { animation: pop 800ms var(--ease-out) 200ms both; }
+.date-tile { animation-delay: 300ms; }
+
+/* Ambient contour drift: the topographic lines slowly breathe */
+@keyframes drift { from { background-position: 42% 48%; background-size: 112%; } to { background-position: 58% 52%; background-size: 124%; } }
+.hero, .page-hero { background-size: 112%; animation: drift 40s ease-in-out infinite alternate; }
+
+/* Scroll reveal (JS adds .reveal, then .in-view once visible) */
+.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity var(--dur-in) var(--ease-out), transform var(--dur-in) var(--ease-out); transition-delay: calc(var(--i, 0) * 90ms); will-change: opacity, transform; }
+.js .reveal.in-view { opacity: 1; transform: none; will-change: auto; }
+
+/* Header gains depth once the page scrolls */
+.site-header { transition: box-shadow var(--ease), background-color var(--ease); }
+.site-header.scrolled { box-shadow: 0 6px 20px rgba(12, 26, 74, .12); }
+.brand-mark { transition: transform 400ms var(--ease-out); }
+.brand:hover .brand-mark { transform: rotate(-6deg) scale(1.06); }
+
+/* Nav underline grows in */
+#main-nav a:not(.nav-ext) { position: relative; }
+@media (min-width: 861px) {
+  #main-nav a:not(.nav-ext):not([aria-current='page'])::after { content: ''; position: absolute; left: 16px; right: 16px; bottom: 6px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 260ms var(--ease-out); }
+  #main-nav a:not(.nav-ext):not([aria-current='page']):hover::after { transform: scaleX(1); }
+}
+
+/* Buttons: arrows nudge, press feels physical */
+.button .icon:last-child, .text-link .icon:last-child, .ec-more .icon { transition: transform 240ms var(--ease-out); }
+.button:hover .icon:last-child, .text-link:hover .icon:last-child, .event-card:hover .ec-more .icon { transform: translateX(4px); }
+.button:hover .icon[href], .button:hover svg:has(use[href='#i-arrow-up-right']), .text-link:hover svg:has(use[href='#i-arrow-up-right']) { transform: translate(3px, -3px); }
+.button:active { transform: translateY(1px) scale(.99); }
+
+/* Cards: date bar brightens, icon tiles lift */
+.ec-date { transition: background-color var(--ease); }
+.event-card:hover .ec-date { background: var(--primary-deep); }
+.icon-tile { transition: transform 300ms var(--ease-out), background-color var(--ease); }
+.mission-row:hover .icon-tile, .topic-card:hover .icon-tile, .step:hover .icon-tile { transform: translateY(-3px) rotate(-4deg); background: var(--accent); }
+.topic-card, .step, .outline-item, .visit-card { transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out), border-color var(--ease); }
+.topic-card:hover, .step:hover, .outline-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+.topic-card:hover .topic-num, .step:hover .topic-num { color: var(--accent); }
+.topic-num { transition: color var(--ease); }
+
+/* Live status dot pulses (open only) */
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(22, 101, 52, .45); } 70%, 100% { box-shadow: 0 0 0 7px rgba(22, 101, 52, 0); } }
+.tag.status-open::before { animation: pulse 2.2s ease-out infinite; }
+
+/* Filter results fade in when the list changes */
+@keyframes fade-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.cards.list .event-card:not([hidden]).refresh { animation: fade-up 380ms var(--ease-out) both; }
+
+/* FAQ answers ease open */
+details[open] > p { animation: fade-up 300ms var(--ease-out) both; }
+
+/* Mobile menu slides down */
+@media (max-width: 860px) {
+  #main-nav:not([hidden]) { animation: fade-up 240ms var(--ease-out) both; }
+}
+
+/* Reduced motion: content must be visible and static */
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero, .page-hero, .hero-copy > *, .page-hero .container > *, .detail-heading > div > *, .date-tile, .featured, .tag.status-open::before { animation: none !important; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
+  .topic-card:hover, .step:hover, .outline-item:hover, .brand:hover .brand-mark, .mission-row:hover .icon-tile, .topic-card:hover .icon-tile, .step:hover .icon-tile { transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .001ms !important; animation: none !important; scroll-behavior: auto !important; }
   .event-card:hover { transform: none; }

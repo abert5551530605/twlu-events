@@ -17,3 +17,11 @@ test('all rendered local links/assets exist and fragments resolve',async()=>{
 });
 test('archived October keeps price record and never offers registration form',async()=>{const html=await readFile('dist/events/2026-october.html','utf8');assert.match(html,/活動已結束/);assert.match(html,/1,200/);assert.match(html,/上午或下午/);assert.doesNotMatch(html,/<form|前往官方報名頁/);});
 test('only verified future course has external registration URL',()=>{assert.equal(events.filter(e=>e.registration).length,1);assert.equal(events[0].registration,'https://www.beclass.com/rid=31528ee6ae84276cc736');});
+
+test('motion is decorative: reduced-motion fallback exists and content is not hidden without JS',async()=>{
+ const css=await readFile('public/assets/style.css','utf8');const js=await readFile('public/assets/app.js','utf8');
+ assert.match(css,/@media \(prefers-reduced-motion: reduce\)/);
+ assert.match(css,/\.js \.reveal\s*\{/);assert.doesNotMatch(css,/(^|\n)\.reveal\s*\{[^}]*opacity:\s*0/);
+ assert.match(js,/prefers-reduced-motion: reduce/);
+ assert.doesNotMatch(css,/transition:\s*all/);
+});
