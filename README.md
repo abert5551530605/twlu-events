@@ -23,7 +23,7 @@ npm run preview
 
 `npm run build` 產生 `dist/`。可部署到支援靜態網站的主機；在主機設定建置指令 `npm run build`，輸出目錄 `dist`。設定非敏感環境變數 `SITE_URL=https://your-domain.example` 後會產生對應 canonical URL 與 sitemap；不要在預覽環境填入既有正式網站網址。
 
-GitHub Actions 執行建置與測試，並上傳 `twlu-events-website` 建置產物。**此工作流程不會自動覆蓋原 ChatGPT Sites 或 twlu.site。** 原網站發佈與主機連線尚未變更。
+GitHub Actions 執行建置與測試（`check.yml`），並在 push 到 main 時發佈到 GitHub Pages（`pages.yml`，網址 https://abert5551530605.github.io/twlu-events/）。**不會覆蓋原 ChatGPT Sites 或 twlu.site。** 原網站發佈與主機連線尚未變更。
 
 ## 維護位置
 

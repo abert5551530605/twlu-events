@@ -40,5 +40,5 @@ The main association website and the October 2026 event registration page are pa
 
 ## Current repository status
 
-On 2026-11-26 the user explicitly authorized a complete UI UX Pro Max redesign. This repository now contains that redesigned static association website, shared event detail pages, design records, build scripts, and automated checks. The existing October Apps Script backend and original Sites server source have not been imported or modified. See README.md and docs/integrations.md for the actual boundaries. GitHub CI builds artifacts; it does not publish over existing production.
+On 2026-11-26 the user explicitly authorized a complete UI UX Pro Max redesign. This repository now contains that redesigned static association website, shared event detail pages, design records, build scripts, and automated checks. The existing October Apps Script backend and original Sites server source have not been imported or modified. See README.md and docs/integrations.md for the actual boundaries. GitHub CI builds and publishes to GitHub Pages only; it does not publish over existing ChatGPT Sites production.
 

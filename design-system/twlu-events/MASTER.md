@@ -7,8 +7,8 @@
 ---
 
 **Project:** TWLU Events
-**Generated:** 2026-11-26 01:41:57
-**Category:** B2B Service
+**Generated:** 2026-11-26 02:25:14
+**Category:** Legal Services
 
 ---
 
@@ -18,24 +18,24 @@
 
 | Role | Hex | CSS Variable |
 |------|-----|--------------|
-| Primary | `#0F172A` | `--color-primary` |
+| Primary | `#1E3A8A` | `--color-primary` |
 | On Primary | `#FFFFFF` | `--color-on-primary` |
-| Secondary | `#334155` | `--color-secondary` |
+| Secondary | `#1E40AF` | `--color-secondary` |
 | On Secondary | `#FFFFFF` | `--color-on-secondary` |
-| Accent/CTA | `#0369A1` | `--color-accent` |
+| Accent/CTA | `#B45309` | `--color-accent` |
 | On Accent/CTA | `#FFFFFF` | `--color-on-accent` |
 | Background | `#F8FAFC` | `--color-background` |
-| Foreground | `#020617` | `--color-foreground` |
+| Foreground | `#0F172A` | `--color-foreground` |
 | Card | `#FFFFFF` | `--color-card` |
-| Card Foreground | `#020617` | `--color-card-foreground` |
-| Muted | `#E8ECF1` | `--color-muted` |
+| Card Foreground | `#0F172A` | `--color-card-foreground` |
+| Muted | `#E9EEF5` | `--color-muted` |
 | Muted Foreground | `#475569` | `--color-muted-foreground` |
-| Border | `#E2E8F0` | `--color-border` |
+| Border | `#CBD5E1` | `--color-border` |
 | Destructive | `#DC2626` | `--color-destructive` |
 | On Destructive | `#FFFFFF` | `--color-on-destructive` |
-| Ring | `#0F172A` | `--color-ring` |
+| Ring | `#1E3A8A` | `--color-ring` |
 
-**Color Notes:** Professional navy + blue CTA
+**Color Notes:** Authority navy + trust gold
 
 ### Typography
 
@@ -79,7 +79,7 @@
 ```css
 /* Primary Button */
 .btn-primary {
-  background: #0369A1;
+  background: #B45309;
   color: #FFFFFF;
   padding: 12px 24px;
   border-radius: 8px;
@@ -96,8 +96,8 @@
 /* Secondary Button */
 .btn-secondary {
   background: transparent;
-  color: #0F172A;
-  border: 2px solid #0F172A;
+  color: #1E3A8A;
+  border: 2px solid #1E3A8A;
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
@@ -136,9 +136,9 @@
 }
 
 .input:focus {
-  border-color: #0F172A;
+  border-color: #1E3A8A;
   outline: none;
-  box-shadow: 0 0 0 3px #0F172A20;
+  box-shadow: 0 0 0 3px #1E3A8A20;
 }
 ```
 
@@ -184,7 +184,7 @@
 
 ## Anti-Patterns (Do NOT Use)
 
-- ❌ Playful design
+- ❌ Outdated design
 - ❌ Hidden credentials
 - ❌ AI purple/pink gradients
 

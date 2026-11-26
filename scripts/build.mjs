@@ -1,6 +1,6 @@
 import {mkdir,rm,cp,writeFile} from 'node:fs/promises';
 import {events,association as a,status,labels,dateLabel} from '../src/events.mjs';
-import {layout,home,directory,detail,about,help} from '../src/templates.mjs';
+import {layout,home,directory,detail,about,help,notFound} from '../src/templates.mjs';
 await rm('dist',{recursive:true,force:true});
 await mkdir('dist',{recursive:true});
 await cp('public','dist',{recursive:true});
@@ -9,7 +9,7 @@ for(const [path,title,content,nav] of pages){
   if(path.includes('/')) await mkdir('dist/events',{recursive:true});
   await writeFile(`dist/${path}`,layout({title,content,nav,depth:path.includes('/')?1:0,path}));
 }
-await writeFile('dist/404.html',layout({title:'找不到這個頁面',nav:'',depth:0,path:'404.html',content:'<section class="section container"><p class="eyebrow">404</p><h1>這個頁面暫時找不到。</h1><p>您可以回到首頁，或從活動總覽重新尋找課程。</p><a class="button" href="index.html">回到首頁</a></section>'}));
+await writeFile('dist/404.html',layout({title:'找不到這個頁面',nav:'',depth:0,path:'404.html',content:notFound()}));
 await writeFile('dist/assets/events.json',JSON.stringify(events.map(({slug,title,date,deadline,registration})=>({slug,title,date,deadline,registration}))));
 const site = process.env.SITE_URL?.replace(/\/$/,'');
 if(site){

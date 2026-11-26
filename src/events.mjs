@@ -9,6 +9,7 @@ export const events = [
     slug: '2026-mortgage', edition: '115年十一月份專題講座', title: '抵押權法令實務眉角解析',
     topic: '權利與登記', date: '2026-12-05', deadline: '2026-11-30', speaker: '黃偉政 老師',
     description: '從抵押權的基本觀念走進實務現場，串聯登記、拍賣與塗銷的關鍵環節，透過案例梳理不同階段需要留意的問題。',
+    tagline: '從登記到實行，梳理抵押權的關鍵問題。',
     note: '本場為「十一月份專題講座」，實際上課日期為 12 月 5 日（六）。',
     source: article('2026/11/05', '新北市土地利用學會115年十一月份專題講座'),
     registration: 'https://www.beclass.com/rid=31528ee6ae84276cc736',
@@ -53,4 +54,7 @@ export const labels = {open:'開放報名', closed:'報名已截止', past:'活�
 export function dateLabel(date) {
   const d = new Date(`${date}T12:00:00+08:00`);
   return `${d.getUTCFullYear()} 年 ${d.getUTCMonth()+1} 月 ${d.getUTCDate()} 日（${'日一二三四五六'[d.getUTCDay()]}）`;
+}
+export function weekday(date) {
+  return '日一二三四五六'[new Date(`${date}T12:00:00+08:00`).getUTCDay()];
 }
