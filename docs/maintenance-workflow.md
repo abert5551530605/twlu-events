@@ -17,7 +17,7 @@
 | `scripts/serve.mjs` | 本機預覽 `dist/`（`npm run preview`，預設 4173） |
 | `public/assets/style.css` | 全站樣式，含 Motion system 區塊 |
 | `public/assets/app.js` | 選單、篩選、報名狀態重算、動畫觸發 |
-| `public/assets/status.js` | 報名狀態判斷（與 `events.mjs` 必須一致） |
+| `public/assets/status.js` | 建置端與瀏覽器共用的報名狀態判斷與標籤 |
 | `tests/site.test.mjs` | 自動測試 |
 | `design-system/twlu-events/` | 設計系統紀錄（MASTER.md 與頁面覆寫） |
 | `docs/` | 整合說明、資料來源、驗證紀錄、本文件 |
@@ -65,7 +65,7 @@ SITE_URL=https://abert5551530605.github.io/twlu-events npm run build  # 產生 c
 
 ### 報名狀態邏輯
 `status()` 以台北時間判斷：活動結束後 16:45 → `past`；截止日 23:59:59 之後或沒有 `registration` → `closed`；否則 `open`。
-靜態頁面在建置時決定狀態，瀏覽器載入後再用 `status.js` 重算並撤下過期的報名按鈕。**修改狀態規則時，`events.mjs` 與 `status.js` 必須同時改**，測試會比對兩者。
+靜態頁面在建置時決定狀態，瀏覽器載入後再用 `status.js` 重算並撤下過期的報名按鈕。建置端的 `events.mjs` 直接匯出 `status.js` 的同一個函式。瀏覽器使用頁面標籤內的日期與報名資格重算狀態。
 
 ## 5. 修改設計
 

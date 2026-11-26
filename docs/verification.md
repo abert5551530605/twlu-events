@@ -18,3 +18,11 @@ skill 版本 8db36338810d0942567b97ce439affd1619fcf31；`design-system/twlu-even
 - `npm run check`：建置 9 頁、5 項測試通過（新增動畫安全測試：減少動態效果區塊存在、隱藏狀態只在 `.js .reveal`、不使用 `transition: all`）。
 - Chrome + Playwright（1280 寬）於 5 個頁面實測：一般模式下捲動後無卡在不可見的元素、無橫向溢位、無 JS 錯誤、卡片 hover 無延遲；`prefers-reduced-motion: reduce` 模式下載入即全部可見。
 - 未實測：跨頁淡入淡出（View Transitions）於各瀏覽器的表現、Safari / Firefox、低階裝置效能。
+
+## 課程瀏覽與載入優化（2026-11-26）
+
+- Node 24.22.3 執行 `npm run check`，產生 9 頁，5 項通過，0 項略過。
+- `npm run preview` 搭配 Chromium 156 和 Playwright。9 頁 × 375、768、1440 px × 一般及減少動態效果，共 54 組，皆無橫向溢位、Console error 或未處理 JS 例外。減少動態效果時標題及進場元素可見。另檢視三種寬度的活動總覽截圖。
+- 驗證搜尋及清除後恢復 4 場活動、詳情頁鍵盤跳至時段、FAQ 全開與全關、行動選單 Escape 關閉，以及停用 JS 後完整列出 4 場。十月份 WebP 海報可解碼並可開啟 JPEG 原圖。
+- 模擬台北時間 12 月 1 日載入尚含報名按鈕的靜態詳情頁，瀏覽器撤下過期連結，保留可返回活動總覽的相對路徑。
+- 海報預覽由 490,344 降至 309,808 bytes。測試機有本機 Noto 字型。外部 Google Fonts 服務在此環境回應代理 403，未驗證缺少本機字型時的遠端下載。未測實際載入秒數、Lighthouse、Safari 或 Firefox。

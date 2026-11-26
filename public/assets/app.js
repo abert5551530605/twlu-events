@@ -1,4 +1,4 @@
-import {getStatus} from './status.js';
+import {getStatus, labels} from './status.js';
 
 /* ---------- Mobile menu (progressive enhancement) ---------- */
 const menu = document.querySelector('.menu-toggle');
@@ -35,6 +35,9 @@ function filter() {
     const show = (!q || c.dataset.search.toLocaleLowerCase('zh-TW').includes(q))
       && (category.value === 'all' || category.value === c.dataset.category)
       && (state.value === 'all' || state.value === c.dataset.state);
+    if (c.hidden && show && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      c.animate([{opacity: 0, transform: 'translateY(6px)'}, {opacity: 1, transform: 'none'}], {duration: 180});
+    }
     c.hidden = !show;
     if (show) count++;
   });
@@ -42,9 +45,10 @@ function filter() {
   document.querySelector('#empty').hidden = count !== 0;
   const url = new URL(location.href);
   for (const [k, v] of [['q', search.value], ['category', category.value], ['state', state.value]]) {
-    if (v && v !== 'all') url.searchParams.set(k, v); else url.searchParams.delete(k);
+    if (v && (k === 'q' || v !== 'all')) url.searchParams.set(k, v); else url.searchParams.delete(k);
   }
-  history.replaceState(null, '', url);
+  document.querySelector('#reset').hidden = !search.value && category.value === 'all' && state.value === 'all';
+  if (url.href !== location.href) history.replaceState(null, '', url);
 }
 if (filters) {
   filters.hidden = false;
@@ -59,44 +63,57 @@ if (filters) {
   document.querySelector('#reset').addEventListener('click', () => {
     search.value = ''; category.value = 'all'; state.value = 'all'; filter(); search.focus();
   });
-  filter();
 }
+
 
 /* ---------- Registration status (re-checked in the browser, Taipei time) ----------
    A static build can go stale after the deadline, so on load and on resume we
    replace any still-open registration call-to-action once the deadline passes. */
-const labels = {open: '開放報名', closed: '報名已截止', past: '活動已結束'};
-let data = [];
+const badges = document.querySelectorAll('[data-status]');
 function refreshStatus() {
-  for (const event of data) {
-    const value = getStatus(event);
-    document.querySelectorAll(`[data-status="${event.slug}"]`).forEach(el => {
-      el.textContent = labels[value];
-      el.className = `tag status-${value}`;
-    });
-    document.querySelectorAll(`[data-event="${event.slug}"]`).forEach(el => { el.dataset.state = value; });
-    document.querySelectorAll(`[data-registration="${event.slug}"]`).forEach(box => {
+  let changed = false;
+  for (const badge of badges) {
+    const {status: slug, date, deadline, registrationAvailable} = badge.dataset;
+    const value = getStatus({date, deadline, registration: registrationAvailable});
+    if (badge.classList.contains(`status-${value}`)) continue;
+    changed = true;
+    badge.textContent = labels[value];
+    badge.className = `tag status-${value}`;
+    document.querySelectorAll(`[data-event="${slug}"]`).forEach(el => { el.dataset.state = value; });
+    document.querySelectorAll(`[data-registration="${slug}"]`).forEach(box => {
       if (value === 'open' || !box.querySelector('[data-register]')) return;
       const tpl = box.querySelector('template');
       if (!tpl) return;
       const frag = tpl.content.cloneNode(true);
       frag.querySelectorAll('.closed-message').forEach(m => { m.textContent = labels[value]; });
-      const root = document.body.dataset.root || '';
-      frag.querySelectorAll('a[href]').forEach(a => {
-        const h = a.getAttribute('href');
-        if (!/^(https?:|#)/.test(h)) a.setAttribute('href', root + h.replace(/^(\.\.\/)+/, ''));
-      });
       box.replaceChildren(frag);
     });
   }
-  if (filters) filter();
+  return changed;
 }
-fetch(new URL('./events.json', import.meta.url))
-  .then(r => { if (!r.ok) throw new Error('events unavailable'); return r.json(); })
-  .then(events => { data = events; refreshStatus(); })
-  .catch(() => { /* The pre-rendered content remains readable when offline. */ });
-document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshStatus(); });
-setInterval(refreshStatus, 60000);
+function updateDirectoryStatus() {
+  if (refreshStatus() && filters) filter();
+}
+refreshStatus();
+if (filters) filter();
+if (badges.length) {
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) updateDirectoryStatus(); });
+  setInterval(() => { if (!document.hidden) updateDirectoryStatus(); }, 60000);
+}
+
+const faqToggle = document.querySelector('#faq-toggle');
+if (faqToggle) {
+  const answers = [...document.querySelectorAll('.faq details')];
+  const allOpen = () => answers.every(answer => answer.open);
+  const updateLabel = () => { faqToggle.textContent = allOpen() ? '收合全部回答' : '展開全部回答'; };
+  for (const answer of answers) answer.addEventListener('toggle', updateLabel);
+  faqToggle.hidden = false;
+  faqToggle.addEventListener('click', () => {
+    const open = !allOpen();
+    for (const answer of answers) answer.open = open;
+    updateLabel();
+  });
+}
 
 /* ---------- Motion: header depth, scroll reveal, list refresh ----------
    All of this is decoration. Reveal classes are only added when motion is allowed,
@@ -136,10 +153,24 @@ if (!calm && 'IntersectionObserver' in window) {
     io.observe(el);
   });
 }
-if (filters && !calm) {
-  for (const el of [search, category, state]) {
-    el.addEventListener(el === search ? 'input' : 'change', () => {
-      cards.forEach(c => { c.classList.remove('refresh'); void c.offsetWidth; if (!c.hidden) c.classList.add('refresh'); });
-    });
+
+// Prefer installed Taiwanese Noto families. Fetch web fonts only on devices that need them.
+async function loadMissingFonts() {
+  const missing = [];
+  for (const style of ['Sans', 'Serif']) {
+    const family = `Noto ${style} TC`;
+    try {
+      await new FontFace(family, `local("${family}"), local("Noto ${style} CJK TC")`).load();
+    } catch {
+      const weights = style === 'Sans' ? '400;500;700' : '600;700';
+      missing.push(`family=Noto+${style}+TC:wght@${weights}`);
+    }
+  }
+  if (missing.length) {
+    const sheet = document.createElement('link');
+    sheet.rel = 'stylesheet';
+    sheet.href = `https://fonts.googleapis.com/css2?${missing.join('&')}&display=swap`;
+    document.head.append(sheet);
   }
 }
+loadMissingFonts();

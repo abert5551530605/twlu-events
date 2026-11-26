@@ -27,6 +27,7 @@ export const events = [
     source: article('2026/10/02','新北市土地利用學會115年十月份專題講座'),
     legacy: 'https://land-seminar-october-2026.rtfghggytjjj.chatgpt.site/',
     poster: 'assets/october-poster.jpg',
+    posterPreview: 'assets/october-poster.webp',
     outline: [['意定監護法令與實務', '從民法規定出發，研討監護人處分財產的法院許可案例，並延伸理解遺囑信託與未成年人保護。'], ['遺囑登記事件重點', '從常見登記爭議切入，討論公同共有與遺囑繼承的關係，以及登記機關的審查觀點。']],
     fees: [['會員全天','整天','1,200'],['非會員全天','整天','2,400'],['會員半天','上午或下午','800'],['非會員半天','上午或下午','1,600']]
   },
@@ -45,12 +46,7 @@ export const events = [
     outline:[['看懂產業與土地需求','梳理供應鏈變化與工業土地市場，討論產業園區的制度差異。'],['開發策略與風險判讀','從法規、土地開發模式與案例，認識產品定位和區位分析。']]
   }
 ];
-export function status(event, now = new Date()) {
-  if (now.getTime() > Date.parse(`${event.date}T16:45:00+08:00`)) return 'past';
-  if (now.getTime() > Date.parse(`${event.deadline}T23:59:59+08:00`) || !event.registration) return 'closed';
-  return 'open';
-}
-export const labels = {open:'開放報名', closed:'報名已截止', past:'活動已結束'};
+export {getStatus as status, labels} from '../public/assets/status.js';
 export function dateLabel(date) {
   const d = new Date(`${date}T12:00:00+08:00`);
   return `${d.getUTCFullYear()} 年 ${d.getUTCMonth()+1} 月 ${d.getUTCDate()} 日（${'日一二三四五六'[d.getUTCDay()]}）`;

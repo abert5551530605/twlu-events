@@ -1,5 +1,5 @@
 import {mkdir,rm,cp,writeFile} from 'node:fs/promises';
-import {events,association as a,status,labels,dateLabel} from '../src/events.mjs';
+import {events,association as a} from '../src/events.mjs';
 import {layout,home,directory,detail,about,help,notFound} from '../src/templates.mjs';
 await rm('dist',{recursive:true,force:true});
 await mkdir('dist',{recursive:true});
@@ -10,7 +10,6 @@ for(const [path,title,content,nav] of pages){
   await writeFile(`dist/${path}`,layout({title,content,nav,depth:path.includes('/')?1:0,path}));
 }
 await writeFile('dist/404.html',layout({title:'找不到這個頁面',nav:'',depth:0,path:'404.html',content:notFound()}));
-await writeFile('dist/assets/events.json',JSON.stringify(events.map(({slug,title,date,deadline,registration})=>({slug,title,date,deadline,registration}))));
 const site = process.env.SITE_URL?.replace(/\/$/,'');
 if(site){
   if(!/^https:\/\/[a-z0-9.-]+(?::\d+)?(?:\/[a-z0-9._/-]*)?$/i.test(site)) throw new Error('SITE_URL must be an https origin or base path without query');

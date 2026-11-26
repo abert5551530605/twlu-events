@@ -36,7 +36,7 @@ const topicIcon = {'權利與登記': 'scale', '土地利用': 'map', '產業與
 const brandMark = '<svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="14" fill="currentColor"/><g fill="none" stroke-linecap="round" stroke-width="4"><path d="M10 44c9-2 11-14 22-14s13 12 22 10" stroke="#F5B14C"/><path d="M10 32c9-2 11-14 22-14s13 12 22 10" stroke="#fff" stroke-opacity=".75"/><path d="M10 20c9-2 11-8 22-8s13 6 22 4" stroke="#fff" stroke-opacity=".4"/></g></svg>';
 
 /* ---------- Small shared components ---------- */
-const tag = e => `<span class="tag status-${status(e)}" data-status="${e.slug}">${labels[status(e)]}</span>`;
+const tag = e => `<span class="tag status-${status(e)}" data-status="${e.slug}" data-date="${e.date}" data-deadline="${e.deadline}"${e.registration ? ' data-registration-available="yes"' : ''}>${labels[status(e)]}</span>`;
 const href = e => `events/${e.slug}.html`;
 const parts = date => ({y: date.slice(0, 4), m: String(+date.slice(5, 7)), mm: date.slice(5, 7), d: date.slice(8), w: weekday(date)});
 const link = (url, text, cls = 'text-link', attrs = '') => `<a class="${cls}" href="${esc(url)}"${attrs}>${text}${icon('arrow-up-right')}</a>`;
@@ -71,13 +71,10 @@ export function layout({title, content, nav, depth, path}) {
 <meta property="og:locale" content="zh_TW">
 ${site ? `<link rel="canonical" href="${esc(site)}/${path}"><meta property="og:url" content="${esc(site)}/${path}">` : ''}
 <link rel="icon" href="${prefix}assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap">
 <link rel="stylesheet" href="${prefix}assets/style.css">
 <script type="module" src="${prefix}assets/app.js"></script>
 </head>
-<body data-root="${prefix}">
+<body>
 ${sprite}
 <a class="skip" href="#main">跳到主要內容</a>
 <header class="site-header">
@@ -217,9 +214,9 @@ export function directory() {
     <div class="field"><label for="category">課程主題</label><div class="select-wrap"><select id="category"><option value="all">全部主題</option>${[...new Set(events.map(e => e.topic))].map(t => `<option>${t}</option>`).join('')}</select>${icon('chevron-down')}</div></div>
     <div class="field"><label for="state">活動狀態</label><div class="select-wrap"><select id="state"><option value="all">全部活動</option><option value="open">開放報名</option><option value="closed">報名已截止</option><option value="past">已結束活動</option></select>${icon('chevron-down')}</div></div>
   </div>
-  <div class="results-line"><h2>2026 年度課程</h2><p id="result-count" aria-live="polite">共 ${events.length} 場活動</p></div>
+  <div class="results-line"><h2>2026 年度課程</h2><button class="button secondary" id="reset" type="button" hidden>清除所有篩選</button><p id="result-count" aria-live="polite">共 ${events.length} 場活動</p></div>
   <div class="cards list">${events.map(card).join('')}</div>
-  <div id="empty" class="empty" hidden>${icon('search')}<h2>沒有找到符合的活動</h2><p>試試其他關鍵字，或清除篩選重新查看。</p><button class="button secondary" id="reset" type="button">清除所有篩選</button></div>
+  <div id="empty" class="empty" hidden>${icon('search')}<h2>沒有找到符合的活動</h2><p>試試其他關鍵字，或清除篩選重新查看。</p></div>
   <p class="source-note">更多歷年課程，可至${link('https://twlu.site/category/課程報名/', '學會原官網')}查閱。</p>
 </section>`;
 }
@@ -241,10 +238,13 @@ export function detail(e) {
     <time class="date-tile" datetime="${e.date}"><span>${p.y} / ${p.mm}</span><strong>${p.d}</strong><span>星期${p.w}</span></time>
   </div>
 </section>
+<nav class="container course-jumps" aria-label="課程頁內導覽">
+  <a href="#participation">參加資訊</a><a href="#outline">課程重點</a><a href="#schedule">上課時段</a>
+</nav>
 <div class="container detail-layout">
   <aside class="enrollment" aria-label="參加資訊">
     <div class="enrollment-inner">
-      <h2>參加資訊</h2>
+      <h2 id="participation" tabindex="-1">參加資訊</h2>
       <dl>
         <div><dt>${icon('calendar')}上課日期</dt><dd>${dateLabel(e.date)}</dd></div>
         <div><dt>${icon('clock')}上課時間</dt><dd>09:30–12:30<br>13:45–16:45</dd></div>
@@ -264,13 +264,13 @@ export function detail(e) {
     ${e.note ? `<div class="notice">${icon('info')}<div><strong>日期提醒</strong><p>${e.note}</p></div></div>` : ''}
     <section>
       ${eyebrow('COURSE OVERVIEW')}
-      <h2>把觀念帶進真實情境。</h2>
+      <h2 id="outline" tabindex="-1">把觀念帶進真實情境。</h2>
       <p>這堂課以主題研習結合案例討論，讓法規、程序與實務經驗相互對照。您可以先閱讀下方課程重點，再查看參加資訊。</p>
       <ol class="outline">${e.outline.map(([t, d], i) => `<li class="outline-item"><span class="num">0${i + 1}</span><div><h3>${t}</h3><p>${d}</p></div></li>`).join('')}</ol>
     </section>
     <section>
       ${eyebrow('YOUR DAY OF LEARNING')}
-      <h2>一天的學習安排</h2>
+      <h2 id="schedule" tabindex="-1">一天的學習安排</h2>
       <ol class="schedule">
         <li>${icon('book-open')}<time>09:30–12:30</time><span>上午課程 · 3 小時</span></li>
         <li class="break">${icon('coffee')}<time>12:30–13:45</time><span>午休</span></li>
@@ -286,7 +286,7 @@ export function detail(e) {
     </section>` : ''}
     ${e.poster ? `<section>
       <h2>活動海報</h2>
-      <figure class="poster-frame"><img class="poster" src="${e.poster}" alt="115年十月份專題講座原始海報；日期、地點、講師與課程內容已列於本頁文字" width="1152" height="1536" loading="lazy"><figcaption>歷史活動海報（完整比例）</figcaption></figure>
+      <figure class="poster-frame"><img class="poster" src="${e.posterPreview || e.poster}" alt="115年十月份專題講座原始海報；日期、地點、講師與課程內容已列於本頁文字" width="1152" height="1536" loading="lazy"><figcaption>歷史活動海報 · <a href="${e.poster}">查看原尺寸海報</a></figcaption></figure>
     </section>` : ''}
     <section class="sources">
       <h2>公告與相關資訊</h2>
@@ -344,6 +344,7 @@ export function help() {
     </div>
     <div class="faq">
       <h2>常見問題</h2>
+      <button type="button" class="button secondary" id="faq-toggle" hidden>展開全部回答</button>
       <details><summary>費用與全天、半天如何選擇？${icon('chevron-down')}</summary><p>請以各場課程的官方報名頁為準。不同課程的費用與時段選項可能不同，請勿沿用過往活動的價格。</p></details>
       <details><summary>如何查詢、修改或取消報名？${icon('chevron-down')}</summary><p>請使用報名確認通知中的查詢連結，或依該場活動報名頁的聯絡方式洽詢承辦人。本平台不公開報名者資料。</p></details>
       <details><summary>可以在這裡直接填寫個人資料嗎？${icon('chevron-down')}</summary><p>本平台提供活動資訊與報名入口。最新課程會連至學會公告的 BeClass 報名頁，個人資料在該報名服務填寫。</p></details>
